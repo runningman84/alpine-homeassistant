@@ -27,9 +27,9 @@ RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-c
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
     pip3 install --no-cache-dir fritzconnection=="${FRITZ_VERSION}" && \
-    pip3 uninstall pycrypto && \
-    pip3 uninstall pycryptodome && \
-    pip3 install pycryptodome && \
+    pip3 uninstall -y pycrypto && \
+    pip3 uninstall -y pycryptodome && \
+    pip3 install --no-cache-dir pycryptodome && \
     apk del build-dependencies && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
