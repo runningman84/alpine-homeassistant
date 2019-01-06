@@ -25,7 +25,7 @@ RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-c
     pip3 install --no-cache-dir -r /tmp/requirements_plugins_filtered.txt && \
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
-    pip3 install --no-cache-dir fritzconnection==0.6.5
+    pip3 install --no-cache-dir fritzconnection==0.6.5 && \
     apk del build-dependencies && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
