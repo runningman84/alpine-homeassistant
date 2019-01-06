@@ -7,7 +7,7 @@ ARG UID=1000
 ARG GUID=1000
 ARG MAKEFLAGS=-j4
 ARG VERSION=0.84.6
-ARG PLUGINS="frontend|otp|QR|sqlalchemy|netdisco|distro|xmltodict|mutagen|warrant|hue|xiaomi|fritz|hole|http|google|psutil|weather|musiccast|nmap|webpush|unifi|uptimerobot|speedtest|rxv|gTTS|wakeonlan|websocket|paho-mqtt|miio"
+ARG PLUGINS="frontend|otp|QR|sqlalchemy|netdisco|distro|xmltodict|mutagen|warrant|hue|xiaomi|fritz|hole|http|google|psutil|weather|musiccast|nmap|webpush|unifi|uptimerobot|speedtest|rxv|gTTS|wakeonlan|websocket|paho-mqtt|miio|dyson|telegram"
 
 ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
 
@@ -25,6 +25,7 @@ RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap 
     pip3 install --no-cache-dir -r /tmp/requirements_plugins_filtered.txt && \
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
+    pip3 install --no-cache-dir fritzconnection==0.6.5
     apk del build-dependencies && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
