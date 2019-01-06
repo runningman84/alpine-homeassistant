@@ -11,10 +11,10 @@ ARG PLUGINS="frontend|otp|QR|sqlalchemy|netdisco|distro|xmltodict|mutagen|warran
 
 ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
 
-RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap ffmpeg mariadb-client mariadb-connector-c-dev && \
+RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap iputils ffmpeg mariadb-client mariadb-connector-c-dev tini && \
     chmod u+s /bin/ping && \
     addgroup -g ${GUID} hass && \
-    adduser -h /data -D -G hass -s /bin/sh -u ${UID} hass && \
+    adduser -h /config -D -G hass -s /bin/sh -u ${UID} hass && \
     pip3 install --upgrade --no-cache-dir pip && \
     apk add --no-cache --virtual=build-dependencies build-base linux-headers python3-dev tzdata && \
     cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
@@ -30,4 +30,6 @@ RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap 
 
 EXPOSE 8123
 
-ENTRYPOINT ["hass", "--open-ui", "--config=/data"]
+ENTRYPOINT ["/sbin/tini"]
+
+CMD [ "hass", "--open-ui", "--config=/config" ]
