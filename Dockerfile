@@ -15,7 +15,7 @@ ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/
 RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-client tini libxml2 libxslt && \
     chmod u+s /bin/ping && \
     addgroup -g ${GUID} hass && \
-    adduser -h /config -D -G hass -s /bin/sh -u ${UID} hass && \
+    adduser -D -G hass -s /bin/sh -u ${UID} hass && \
     pip3 install --upgrade --no-cache-dir pip && \
     apk add --no-cache --virtual=build-dependencies build-base linux-headers tzdata python3-dev libffi-dev libressl-dev libxml2-dev libxslt-dev mariadb-connector-c-dev && \
     cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
