@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.8
 LABEL maintainer="Sebastien Lucas <sebastien@slucas.fr>"
 LABEL Description="Home Assistant"
 
@@ -34,6 +34,8 @@ RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-c
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 EXPOSE 8123
+
+VOLUME /config
 
 ENTRYPOINT ["/sbin/tini"]
 
