@@ -6,7 +6,7 @@ ARG TIMEZONE=Europe/Paris
 ARG UID=1000
 ARG GUID=1000
 ARG MAKEFLAGS=-j4
-ARG VERSION=0.88.1
+ARG VERSION=0.90.2
 ARG FRITZ_VERSION==0.6.5
 ARG PLUGINS="frontend|otp|QR|sqlalchemy|netdisco|distro|xmltodict|mutagen|warrant|hue|xiaomi|fritz|hole|http|google|psutil|weather|musiccast|nmap|webpush|unifi|uptimerobot|speedtest|rxv|gTTS|wakeonlan|websocket|paho-mqtt|miio|purecoollink|telegram|prometheus"
 
