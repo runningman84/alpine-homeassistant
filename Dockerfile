@@ -17,11 +17,12 @@ RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-c
     addgroup -g ${GUID} hass && \
     adduser -D -G hass -s /bin/sh -u ${UID} hass && \
     pip3 install --upgrade --no-cache-dir pip && \
-    apk add --no-cache --virtual=build-dependencies build-base linux-headers tzdata python3-dev libffi-dev libressl-dev libxml2-dev libxslt-dev mariadb-connector-c-dev && \
+    apk add --no-cache --virtual=build-dependencies build-base linux-headers tzdata python3-dev libffi-dev libressl-dev libxml2-dev libxslt-dev mariadb-connector-c-dev jpeg-dev && \
     cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
     sed '/^$/q' /tmp/requirements_all.txt > /tmp/requirements_core.txt && \
     sed '1,/^$/d' /tmp/requirements_all.txt > /tmp/requirements_plugins.txt && \
     egrep -i -e "${PLUGINS}" /tmp/requirements_plugins.txt | grep -v '#' > /tmp/requirements_plugins_filtered.txt && \
+    export GNUMAKEFLAGS=${MAKEFLAGS} && \
     pip3 install --no-cache-dir -r /tmp/requirements_core.txt && \
     pip3 install --no-cache-dir -r /tmp/requirements_plugins_filtered.txt && \
     pip3 install --no-cache-dir mysqlclient && \
