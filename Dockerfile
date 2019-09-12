@@ -18,7 +18,7 @@ RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-c
     export MAKEFLAGS="-j$(nproc)" && \
     export GNUMAKEFLAGS="-j$(nproc)" && \
     pip3 install --upgrade --no-cache-dir pip && \
-    apk add --no-cache --virtual=build-dependencies build-base linux-headers tzdata python3-dev libffi-dev libressl-dev libxml2-dev libxslt-dev mariadb-connector-c-dev jpeg-dev ffmpeg-dev && \
+    apk add --no-cache --virtual=build-dependencies build-base linux-headers tzdata python3-dev libffi-dev libressl-dev libxml2-dev libxslt-dev mariadb-connector-c-dev jpeg-dev ffmpeg-dev glib-dev && \
     cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
     sed '/^$/q' /tmp/requirements_all.txt > /tmp/requirements_core.txt && \
     sed '1,/^$/d' /tmp/requirements_all.txt > /tmp/requirements_plugins.txt && \
