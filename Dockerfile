@@ -5,7 +5,7 @@ LABEL Description="Home Assistant"
 ARG TIMEZONE=Europe/Paris
 ARG UID=1000
 ARG GUID=1000
-ARG VERSION=0.98.5
+ARG VERSION=0.100.1
 ARG FRITZ_VERSION==0.6.5
 ARG PLUGINS="frontend|otp|QR|sqlalchemy|netdisco|distro|xmltodict|mutagen|warrant|hue|xiaomi|fritz|hole|http|google|psutil|weather|musiccast|nmap|webpush|unifi|uptimerobot|speedtest|rxv|gTTS|wakeonlan|websocket|paho-mqtt|miio|purecoollink|telegram|prometheus|pyhomematic|panasonic_viera|nabucasa|PyNaCl|purecool|influxdb|pillow|getmac|watchdog|doods|av"
 
@@ -25,7 +25,6 @@ RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-c
     egrep -i -e "${PLUGINS}" /tmp/requirements_plugins.txt | grep -v '#' > /tmp/requirements_plugins_filtered.txt && \
     pip3 install --no-cache-dir -r /tmp/requirements_core.txt && \
     pip3 install --no-cache-dir -r /tmp/requirements_plugins_filtered.txt && \
-    pip3 install --no-cache-dir pydoods && \
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
     pip3 install --no-cache-dir fritzconnection=="${FRITZ_VERSION}" && \
