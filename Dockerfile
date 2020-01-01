@@ -11,7 +11,7 @@ ARG PLUGINS="frontend|otp|QR|sqlalchemy|netdisco|distro|xmltodict|mutagen|warran
 
 ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
 
-RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-client tini libxml2 libxslt && \
+RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-client mariadb-connector-c tini libxml2 libxslt && \
     chmod u+s /bin/ping && \
     addgroup -g ${GUID} hass && \
     adduser -D -G hass -s /bin/sh -u ${UID} hass && \
