@@ -5,7 +5,7 @@ LABEL Description="Home Assistant"
 ARG TIMEZONE=Europe/Paris
 ARG UID=1000
 ARG GUID=1000
-ARG VERSION=0.108.3
+ARG VERSION=0.108.4
 ARG PLUGINS="frontend|otp|QR|sqlalchemy|netdisco|distro|xmltodict|mutagen|warrant|hue|xiaomi|fritz|hole|http|google|psutil|weather|musiccast|nmap|webpush|unifi|uptimerobot|speedtest|rxv|gTTS|wakeonlan|websocket|paho-mqtt|miio|purecoollink|telegram|prometheus|pyhomematic|panasonic_viera|nabucasa|PyNaCl|purecool|influxdb|pillow|getmac|watchdog|doods|av|HAP|routeros"
 
 ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
@@ -24,6 +24,7 @@ RUN apk add --no-cache git python3 ca-certificates nmap iputils ffmpeg mariadb-c
     egrep -i -e "${PLUGINS}" /tmp/requirements_plugins.txt | grep -v '#' > /tmp/requirements_plugins_filtered.txt && \
     pip3 install --no-cache-dir -r /tmp/requirements_core.txt && \
     pip3 install --no-cache-dir -r /tmp/requirements_plugins_filtered.txt && \
+    pip3 install --no-cache-dir ujson && \
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
     apk del build-dependencies && \
